@@ -1,10 +1,10 @@
 name: debug-download
 
 on:
+  workflow_dispatch:
   push:
     paths:
-      - 'trigger_debug.txt'
-  workflow_dispatch:
+      - 'debug.py'
 
 permissions:
   contents: write
@@ -14,45 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${ "{" } secrets.GITHUB_TOKEN { "}" }
-      - name: write debug script
-        run: |
-          cat > /tmp/debug.py << 'SCRIPTEOF'
-import requests, zipfile, io, csv
-
-season = "114S4"
-url = "https://plvr.land.moi.gov.tw/DownloadSeason?season=" + season + "&type=zip&fileName=H_lvr_land_A.zip"
-print("URL:", url)
-r = requests.get(url, timeout=60, headers={"User-Agent": "Mozilla/5.0"})
-print("HTTP:", r.status_code, "Size:", len(r.content))
-if r.status_code == 200:
-    try:
-        z = zipfile.ZipFile(io.BytesIO(r.content))
-        print("ZIP:", z.namelist())
-        for n in z.namelist():
-            if n.upper().endswith("_A.CSV"):
-                with z.open(n) as f:
-                    rows = list(csv.reader(f.read().decode("utf-8-sig", errors="replace").splitlines()))
-                print("row0:", rows[0][:3] if rows else "empty")
-                print("row2:", rows[2][:3] if len(rows)>2 else "na")
-                longtan = [row for row in rows if row and len(row)>0 and "龍潭" in row[0]]
-                print("龍潭 rows:", len(longtan))
-                if longtan:
-                    print("sample:", longtan[0][:3])
-    except Exception as e:
-        print("Error:", e)
-        print("First 200:", r.content[:200])
-else:
-    print("Fail:", r.content[:300])
-
-          SCRIPTEOF
-      - name: run debug
-        run: python3 /tmp/debug.py 2>&1 | tee debug_output.txt
-      - name: commit output
-        run: |
+      - run: pip install requests -q
+      - run: python3 debug.py 2>&1 | tee debug_output.txt
+      - run: |
           git config user.name "bot"
           git config user.email "bot@bot.com"
           git add debug_output.txt
-          git commit -m "debug output $(date)" || echo "no change"
-          git push || echo "push failed"
+          git diff --staged --quiet || git commit -m "debug output"
+          git push
