@@ -42,3 +42,5 @@ print("\n=== Test 3: 直接下載本期 ===")
 try_url("https://plvr.land.moi.gov.tw/Download?type=zip&fileName=H_lvr_land_A.zip")
 
 print("DONE")
+
+# re-trigger v2
