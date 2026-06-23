@@ -1,34 +1,27 @@
-import requests, re, zipfile, io, csv
+import requests, re
 
 s = requests.Session()
 s.headers.update({"User-Agent": "Mozilla/5.0"})
 
-# 取得下載頁面
-r1 = s.get("https://plvr.land.moi.gov.tw/Download_ajax_active", timeout=30)
-html = r1.text
+# 測試各個備用來源
+tests = [
+    # 政府開放資料平台
+    ("data.gov.tw API", "https://data.gov.tw/api/v2/rest/datastore/355000000A-000155-001?limit=1"),
+    # 內政部資料開放平台
+    ("moi open data", "https://data.moi.gov.tw/MoiOD/Data/DataDetail.aspx?oid=E2201829-B4ED-4ED6-B46D-EA0FC376368F"),
+    # 5168 實價登錄（有公開 API）
+    ("5168 api", "https://price.houseprice.tw/api/deals?zipcode=325&keyword=%E9%87%91%E9%BE%8D%E8%B7%AF&page=1"),
+    # 直接 data.gov.tw 下載
+    ("data.gov.tw download", "https://data.gov.tw/dataset/26820"),
+]
 
-# 找所有 DownloadSeason 或 download 的 JS 呼叫
-js_calls = re.findall(r'javascript:[^"\'<>]+', html, re.I)
-print("JS calls:", js_calls[:5])
-
-# 找 href 和 onclick 帶下載的
-hrefs = re.findall(r'href=["\']([^"\']+)["\']', html)
-print("\nHrefs:", hrefs[:10])
-
-# 找 onclick 
-onclicks = re.findall(r'onclick=["\']([^"\']+)["\']', html)
-print("\nOnclicks:", onclicks[:10])
-
-# 找 fileDownload 呼叫（jquery.fileDownload 常見模式）
-file_dl = re.findall(r'fileDownload\([^)]+\)', html)
-print("\nfileDownload calls:", file_dl[:5])
-
-# 找所有包含 .zip 或 .csv 或 DownloadSeason 的 URL
-zip_urls = re.findall(r'["\']([^"\']*(?:zip|csv|DownloadSeason|DownloadOpenData|Download\?)[^"\']*)["\']', html, re.I)
-print("\nZIP/CSV URLs:", zip_urls[:10])
-
-# 印出 HTML 中第一個 table 的結構
-print("\n=== First 2000 chars of HTML ===")
-print(html[html.find('<table'):html.find('<table')+2000] if '<table' in html else html[:2000])
+for name, url in tests:
+    try:
+        r = s.get(url, timeout=15)
+        print(f"{name}: HTTP {r.status_code}, size {len(r.content)}")
+        if r.status_code == 200:
+            print(f"  first 200: {r.content[:200]}")
+    except Exception as e:
+        print(f"{name}: ERROR {e}")
 
 print("DONE")
