@@ -1,15 +1,18 @@
 
-5168 json: HTTP 200, size 49856
-  Content-Type: text/html; charset=utf-8
-  Text preview: b'\r\n<!DOCTYPE html>\r\n<html lang="zh-Hant-TW" translate="no">\r\n<head>\r\n    <title>\xe5\x85\xa8\xe5\x8f\xb0\xe6\x9c\x80\xe6\x96\xb0\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\x88\xbf\xe5\x83\xb9\xe8\xb5\xb0\xe5\x8b\xa2\xef\xbd\x9c5168\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\xaf\x94\xe5\x83\xb9\xe7\x8e\x8b</title>\r\n\r\n    <meta name="viewport" content="width=devi'
+grimmerk README: HTTP 200, size 1564
+The data is from one of the following sites, they supply the same data.
 
-rakuya api: HTTP 404, size 36985
+1. 內政資料開放平台 http://data.moi.gov.tw/MoiOD/Data/DataDetail.aspx?oid=7210D6E9-26B2-415A-A67B-6AF1BE69DF06
+2. 內政部不動產成交案件實際資訊動態分析 http://plvr.land.moi.gov.tw/DownloadOpenData.
 
-twdata: HTTP 404, size 14
+## 本期(非季度)資料
 
-huggingface: HTTP 401, size 179
+從2017S4開始，從半個月改成10天為一週期。說明參考: http://plvr.land.moi.gov.tw/DownloadOpenData.
 
-5168 deals: HTTP 200, size 49856
-  Content-Type: text/html; charset=utf-8
-  Text preview: b'\r\n<!DOCTYPE html>\r\n<html lang="zh-Hant-TW" translate="no">\r\n<head>\r\n    <title>\xe5\x85\xa8\xe5\x8f\xb0\xe6\x9c\x80\xe6\x96\xb0\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\x88\xbf\xe5\x83\xb9\xe8\xb5\xb0\xe5\x8b\xa2\xef\xbd\x9c5168\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\xaf\x94\xe5\x83\xb9\xe7\x8e\x8b</title>\r\n\r\n    <meta name="viewport" content="width=devi'
+1. 內政資料開放平台 (此網站並無提供當期的不動產+預售屋二合一資料下載): http://data.moi.gov.tw/MoiOD/Data/DataDetail.aspx?oid=E2201829-B4ED-4ED6-B46D-EA0FC376368F
+    1. 提供不動產當期交易資料,下載轉至 http://lv
+
+5168 main page: HTTP 403, size 118
+
+yungching api: HTTP 403, size 919
 DONE
