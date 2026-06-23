@@ -1,14 +1,15 @@
-Download links from dataset/26820:
-  http://data.ntpc.gov.tw/od/zipfiledl?oid=3E4195E5-6C4D-4F74-94CA-6DA58A7EA8E4&ft=zip
-  http://data.ntpc.gov.tw/od/zipfiledl?oid=3E4195E5-6C4D-4F74-94CA-6DA58A7EA8E4&ft=zip
+Search HTTP: 200, size: 678187
+Dataset links: []
 
-data.gov.tw links:
-  https://data.gov.tw/
-  https://data.gov.tw/dataset
-  https://data.gov.tw/images/social-media.png
-  https://data.gov.tw/dataset/26820
-  https://data.gov.tw/license
-  https://data.gov.tw
+dataset/77051: HTTP 200
+  plvr/lvr links: ['https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landcsv.zip', 'https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landxml.zip', 'https://plvr.land.moi.gov.tw/Download?type=zip&amp;fileName=lvr_landcsv.zip']
+  zip/csv links: ['https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landcsv.zip', 'https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landxml.zip', 'https://plvr.land.moi.gov.tw/Download?type=zip&amp;fileName=lvr_landcsv.zip']
 
-CKAN API: 404
+dataset/25119: HTTP 200
+  plvr/lvr links: ['https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip', 'https://plvr.land.moi.gov.tw/opendata/lvr_landAxml.zip', 'https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip']
+  zip/csv links: ['https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip', 'https://plvr.land.moi.gov.tw/opendata/lvr_landAxml.zip', 'https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip']
+
+dataset/34521: HTTP 200
+  plvr/lvr links: []
+  zip/csv links: []
 DONE
