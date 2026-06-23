@@ -1,7 +1,14 @@
-data.gov.tw API: HTTP 404, size 876
-moi open data: ERROR HTTPSConnectionPool(host='data.moi.gov.tw', port=443): Max retries exceeded with url: /MoiOD/Data/DataDetail.aspx?oid=E2201829-B4ED-4ED6-B46D-EA0FC376368F (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fa80f33c950>, 'Connection to data.moi.gov.tw timed out. (connect timeout=15)'))
-5168 api: HTTP 200, size 49856
-  first 200: b'\r\n<!DOCTYPE html>\r\n<html lang="zh-Hant-TW" translate="no">\r\n<head>\r\n    <title>\xe5\x85\xa8\xe5\x8f\xb0\xe6\x9c\x80\xe6\x96\xb0\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\x88\xbf\xe5\x83\xb9\xe8\xb5\xb0\xe5\x8b\xa2\xef\xbd\x9c5168\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\xaf\x94\xe5\x83\xb9\xe7\x8e\x8b</title>\r\n\r\n    <meta name="viewport" content="width=devi'
-data.gov.tw download: HTTP 200, size 457135
-  first 200: b'<!DOCTYPE html>\n<html  lang="zh-Hant-TW" dir="ltr" aria-live="polite">\n<head><meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>\xe4\xb8\x8d\xe5\x8b\x95\xe7\x94\xa2\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe8\xb3\x87'
+Download links from dataset/26820:
+  http://data.ntpc.gov.tw/od/zipfiledl?oid=3E4195E5-6C4D-4F74-94CA-6DA58A7EA8E4&ft=zip
+  http://data.ntpc.gov.tw/od/zipfiledl?oid=3E4195E5-6C4D-4F74-94CA-6DA58A7EA8E4&ft=zip
+
+data.gov.tw links:
+  https://data.gov.tw/
+  https://data.gov.tw/dataset
+  https://data.gov.tw/images/social-media.png
+  https://data.gov.tw/dataset/26820
+  https://data.gov.tw/license
+  https://data.gov.tw
+
+CKAN API: 404
 DONE
