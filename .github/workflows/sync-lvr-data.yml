@@ -2,9 +2,11 @@ name: 同步桃園市龍潭區實價登錄資料
 
 on:
   schedule:
-    # 每月1日、11日、21日 UTC 02:00 跑（配合內政部更新）
     - cron: '0 2 1,11,21 * *'
-  workflow_dispatch:  # 允許手動觸發
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   sync-lvr-data:
@@ -12,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 下載並處理實價登錄資料
         run: |
@@ -20,86 +24,77 @@ jobs:
           import requests, zipfile, io, csv, os, json
           from datetime import datetime
 
-          # 計算目前年份對應民國年及季度
           now = datetime.now()
-          year = now.year - 1911  # 轉民國年
+          year = now.year - 1911
           month = now.month
-          quarter = (month - 1) // 3 + 1
-          
-          # 要抓近 5 年的資料（每年4季 = 20季）
+
+          # 近 5 年 = 20 季
           seasons = []
-          y, q = year, quarter
+          y, q = year, (month - 1) // 3 + 1
           for _ in range(20):
               seasons.append(f"{y}S{q}")
               q -= 1
               if q == 0:
                   q = 4
                   y -= 1
-          
+
           all_rows = []
-          headers = None
-          
+          headers_row = None
+
           for season in seasons:
               url = f"https://plvr.land.moi.gov.tw/DownloadSeason?season={season}&type=zip&fileName=H_lvr_land_A.zip"
               print(f"下載 {season}...")
               try:
-                  r = requests.get(url, timeout=60)
+                  r = requests.get(url, timeout=60, headers={"User-Agent": "Mozilla/5.0"})
                   if r.status_code != 200:
                       print(f"  跳過 {season}：HTTP {r.status_code}")
                       continue
-                  
+
                   z = zipfile.ZipFile(io.BytesIO(r.content))
-                  # 找桃園市買賣案件檔案（H_lvr_land_A.csv）
+                  print(f"  ZIP 內容: {z.namelist()}")
+
                   target = None
                   for name in z.namelist():
-                      if 'H_lvr_land_A' in name or (name.endswith('.csv') and '_land_A' in name.lower()):
+                      if name.upper().endswith('_A.CSV'):
                           target = name
                           break
-                  
+
                   if not target:
-                      # 找任何 A 類型（買賣）
-                      for name in z.namelist():
-                          if name.endswith('.csv') and name != 'MANIFEST.CSV':
-                              print(f"  找到: {name}")
-                      print(f"  找不到 H_lvr_land_A，跳過")
+                      print(f"  找不到 _A.CSV，跳過")
                       continue
-                  
+
                   with z.open(target) as f:
                       content = f.read().decode('utf-8-sig', errors='replace')
                       reader = csv.reader(content.splitlines())
                       rows = list(reader)
-                      
-                      if not rows:
+
+                      if len(rows) < 2:
                           continue
-                      
-                      # 第一行是欄位名稱
-                      if headers is None and rows[0][0] != '土地區段位置建物區段門牌':
-                          headers = rows[0]
-                          rows = rows[1:]
-                      elif rows[0][0] != '土地區段位置建物區段門牌':
-                          rows = rows[1:]
-                      
-                      # 過濾龍潭區
-                      for row in rows:
+
+                      # 第一行：欄位說明（中文）；第二行：英文欄位名；第三行起：資料
+                      if headers_row is None:
+                          headers_row = rows[1]  # 用英文欄位名
+                      data_rows = rows[2:]
+
+                      for row in data_rows:
                           if len(row) > 0 and '龍潭' in row[0]:
                               all_rows.append(row)
-                  
+
                   print(f"  完成，目前共 {len(all_rows)} 筆龍潭資料")
-              
+
               except Exception as e:
                   print(f"  錯誤 {season}: {e}")
-          
-          # 儲存結果
+                  import traceback
+                  traceback.print_exc()
+
           os.makedirs('lvr-data', exist_ok=True)
-          
-          output_path = 'lvr-data/longtan_deals.csv'
-          with open(output_path, 'w', newline='', encoding='utf-8') as f:
+
+          with open('lvr-data/longtan_deals.csv', 'w', newline='', encoding='utf-8') as f:
               writer = csv.writer(f)
-              if headers:
-                  writer.writerow(headers)
+              if headers_row:
+                  writer.writerow(headers_row)
               writer.writerows(all_rows)
-          
-          # 記錄更新時間
+
           meta = {
               "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M UTC"),
               "total_rows": len(all_rows),
@@ -107,7 +102,7 @@ jobs:
           }
           with open('lvr-data/meta.json', 'w', encoding='utf-8') as f:
               json.dump(meta, f, ensure_ascii=False, indent=2)
-          
+
           print(f"\n完成！共 {len(all_rows)} 筆龍潭區成交資料")
           PYEOF
 
