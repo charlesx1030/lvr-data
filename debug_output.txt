@@ -1,13 +1,13 @@
-URL: https://plvr.land.moi.gov.tw/DownloadSeason?season=114S4&type=zip&fileName=H_lvr_land_A.zip
-HTTP: 200 Size: 441
-Traceback (most recent call last):
-  File "/home/runner/work/lvr-data/lvr-data/debug.py", line 14, in <module>
-    z = zipfile.ZipFile(io.BytesIO(r.content))
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/zipfile/__init__.py", line 1365, in __init__
-    self._RealGetContents()
-  File "/usr/lib/python3.12/zipfile/__init__.py", line 1432, in _RealGetContents
-    raise BadZipFile("File is not a zip file")
-zipfile.BadZipFile: File is not a zip file
-First 300 bytes: b'\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n<table width="100%" border="0" cellpadding="0" cellspacing="0" class="border" >\r\n\t<tr>\r\n\t\t<td class="text_bg">\xe7\xb3\xbb\xe7\xb5\xb1\xe8\xa8\x8a\xe6\x81\xaf</td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td><table width="100%" border="0" cellspacing="0" cellpadding="0">\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>&nbsp;'
+=== Test 1: DownloadSeason with Referer ===
+  HTTP: 200, size: 441
+  text: b'\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n<table width="100%" border="0" cellpadding="0" cellspacing="0" class="border" >\r\n\t<tr>\r\n\t\t<td class="text_bg">\xe7\xb3\xbb\xe7\xb5\xb1\xe8\xa8\x8a\xe6\x81\xaf</td>\r\n\t</tr>\r\n\t<t'
+
+=== Test 2: 先訪問首頁取 cookie 再下載 ===
+cookies: {'JSESSIONID': 'B4ED7E5338CAE772233B7FF8D9C99BEB'}
+HTTP: 200, size: 441
+text: b'\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n<table width="100%" border="0" cellpadding="0" cellspacing="0" class="border" >\r\n\t<tr>\r\n\t\t<td class="text_bg">\xe7\xb3\xbb\xe7\xb5\xb1\xe8\xa8\x8a\xe6\x81\xaf</td>\r\n\t</tr>\r\n\t<t'
+
+=== Test 3: 直接下載本期 ===
+  HTTP: 404, size: 650
+  text: b'\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">\r\n\r\n<html>\r\n<head>\r\n<title>\xe6\x96\xbd\xe5\xb7\xa5\xe4\xb8\xad..</title>\r\n</head>\r\n<body>\r\n\t<t'
 DONE
