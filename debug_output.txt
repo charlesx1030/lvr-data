@@ -1,7 +1,15 @@
 
-=== https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip ===
-ERROR: HTTPSConnectionPool(host='plvr.land.moi.gov.tw', port=443): Max retries exceeded with url: /opendata/lvr_landAcsv.zip (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fa4a8652240>, 'Connection to plvr.land.moi.gov.tw timed out. (connect timeout=60)'))
+5168 json: HTTP 200, size 49856
+  Content-Type: text/html; charset=utf-8
+  Text preview: b'\r\n<!DOCTYPE html>\r\n<html lang="zh-Hant-TW" translate="no">\r\n<head>\r\n    <title>\xe5\x85\xa8\xe5\x8f\xb0\xe6\x9c\x80\xe6\x96\xb0\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\x88\xbf\xe5\x83\xb9\xe8\xb5\xb0\xe5\x8b\xa2\xef\xbd\x9c5168\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\xaf\x94\xe5\x83\xb9\xe7\x8e\x8b</title>\r\n\r\n    <meta name="viewport" content="width=devi'
 
-=== https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landcsv.zip ===
-ERROR: HTTPSConnectionPool(host='plvr.land.moi.gov.tw', port=443): Max retries exceeded with url: /Download?type=zip&fileName=lvr_landcsv.zip (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fa4a8652450>, 'Connection to plvr.land.moi.gov.tw timed out. (connect timeout=60)'))
+rakuya api: HTTP 404, size 36985
+
+twdata: HTTP 404, size 14
+
+huggingface: HTTP 401, size 179
+
+5168 deals: HTTP 200, size 49856
+  Content-Type: text/html; charset=utf-8
+  Text preview: b'\r\n<!DOCTYPE html>\r\n<html lang="zh-Hant-TW" translate="no">\r\n<head>\r\n    <title>\xe5\x85\xa8\xe5\x8f\xb0\xe6\x9c\x80\xe6\x96\xb0\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\x88\xbf\xe5\x83\xb9\xe8\xb5\xb0\xe5\x8b\xa2\xef\xbd\x9c5168\xe5\xaf\xa6\xe5\x83\xb9\xe7\x99\xbb\xe9\x8c\x84\xe6\xaf\x94\xe5\x83\xb9\xe7\x8e\x8b</title>\r\n\r\n    <meta name="viewport" content="width=devi'
 DONE
