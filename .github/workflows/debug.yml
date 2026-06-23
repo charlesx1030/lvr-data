@@ -1,0 +1,46 @@
+name: debug-download
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: debug download
+        run: |
+          python3 << 'PYEOF'
+          import requests, zipfile, io
+
+          season = "114S4"
+          url = f"https://plvr.land.moi.gov.tw/DownloadSeason?season={season}&type=zip&fileName=H_lvr_land_A.zip"
+          print(f"URL: {url}")
+          
+          r = requests.get(url, timeout=60, headers={"User-Agent": "Mozilla/5.0"})
+          print(f"HTTP: {r.status_code}")
+          print(f"Size: {len(r.content)}")
+          
+          if r.status_code == 200:
+              try:
+                  z = zipfile.ZipFile(io.BytesIO(r.content))
+                  print(f"ZIP files: {z.namelist()}")
+                  for name in z.namelist():
+                      print(f"  {name}")
+              except Exception as e:
+                  print(f"ZIP error: {e}")
+                  print(f"First 200 bytes: {r.content[:200]}")
+          else:
+              print(f"Response: {r.text[:500]}")
+          PYEOF
+      - name: save debug result
+        run: |
+          echo "done" > debug_done.txt
+          git config user.name "bot"
+          git config user.email "bot@bot.com"
+          git add debug_done.txt
+          git commit -m "debug"
+          git push
