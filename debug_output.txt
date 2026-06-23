@@ -1,113 +1,61 @@
-qt.js size: 626
-
-Download funcs: []
-
-qt-ajax.js size: 3388
-
-Download_ajax_active: 200, size: 21952
-
- 
-
-
-
-
-
-
-
-
-
-
-
-  
-
- 
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-	<div class="form-row p-0 mx-0 my-0">
-		<div class="form-group col-sm-12">
-			<span class="text-info">【註:CSV格式編碼為UTF-8】</span><br>
-			<span class="text-danger">資料內容：登記日期 115年6月1日至 115年6月10日之買賣案件，及訂約日期 115年5月1日至 115年5月10日之租賃案件，及交易日
-
-DownloadHistory_ajax_list: 200, size: 20661
-
- 
-
-
-
-
-
-
-
-
-
-
-
-  
-
- 
-
-
-
-
-
-
-
-
-
-
-
- 
-		
-     	<table width="100%" border='0' cellpadding='0' cellspacing='0' id='table5' 
-               style='border-left: 1px solid #cecece; border-right: 1px solid #cecece; border-top: 1px  solid #dfdfdf;
-                border-bottom: 1
-
-Download_ajax_list: 200, size: 5181
-
- 
-
-
-
-
-
-
-
-
-
-
-
-  
-
- 
-
-
-
-
-
-
-
-
-
-
-
- 
-	<div id="intro" class="second-section font">
-		<div
-			class="container-fluid col-xl-10 col-lg-10 col-md-12 col-sm-12 p-0">
-			<div class="rounded-0 border-0">
-				<a
-					class="h5 text-center text-secondary text-decoration-none d-b
-DONE
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/usr/lib/python3/dist-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 791, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 492, in _make_request
+    raise new_e
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 468, in _make_request
+    self._validate_conn(conn)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 1109, in _validate_conn
+    conn.connect()
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 212, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7f2419ac6d50>, 'Connection to plvr.land.moi.gov.tw timed out. (connect timeout=30)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 845, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 517, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='plvr.land.moi.gov.tw', port=443): Max retries exceeded with url: /Download_ajax_active (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f2419ac6d50>, 'Connection to plvr.land.moi.gov.tw timed out. (connect timeout=30)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/lvr-data/lvr-data/debug.py", line 7, in <module>
+    r1 = s.get("https://plvr.land.moi.gov.tw/Download_ajax_active", timeout=30)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 507, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='plvr.land.moi.gov.tw', port=443): Max retries exceeded with url: /Download_ajax_active (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f2419ac6d50>, 'Connection to plvr.land.moi.gov.tw timed out. (connect timeout=30)'))
