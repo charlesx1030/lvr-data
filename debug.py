@@ -1,34 +1,25 @@
-import requests, re
+import requests, re, json
 
 s = requests.Session()
 s.headers.update({"User-Agent": "Mozilla/5.0"})
 
-# 解析 data.gov.tw 資料集頁面
-r1 = s.get("https://data.gov.tw/dataset/26820", timeout=30)
-html = r1.text
+# 搜尋 data.gov.tw 實價登錄桃園市
+r1 = s.get("https://data.gov.tw/datasets/search?q=%E5%AF%A6%E5%83%B9%E7%99%BB%E9%8C%84%E6%A1%83%E5%9C%92&page=1&pageSize=10", timeout=30)
+print(f"Search HTTP: {r1.status_code}, size: {len(r1.content)}")
 
-# 找下載連結
-download_links = re.findall(r'https?://[^\s"\'<>]*(?:download|csv|zip)[^\s"\'<>]*', html, re.I)
-print("Download links from dataset/26820:")
-for l in download_links[:10]:
-    print(" ", l)
+# 找 dataset links
+links = re.findall(r'href=["\'](/dataset/\d+)["\']', r1.text)
+print("Dataset links:", links[:10])
 
-# 找 data.gov.tw/dataset 相關 API
-api_links = re.findall(r'https?://[^\s"\'<>]*data\.gov\.tw[^\s"\'<>]*', html, re.I)
-print("\ndata.gov.tw links:")
-for l in set(api_links[:10]):
-    print(" ", l)
-
-# 試試 CKAN API (data.gov.tw 用 CKAN)
-r2 = s.get("https://data.gov.tw/api/3/action/package_show?id=26820", timeout=15)
-print(f"\nCKAN API: {r2.status_code}")
-if r2.status_code == 200:
-    import json
-    data = r2.json()
-    if data.get('success'):
-        resources = data['result'].get('resources', [])
-        print(f"Resources: {len(resources)}")
-        for res in resources:
-            print(f"  {res.get('name','?')} -> {res.get('url','?')[:100]}")
+# 試 dataset/77051（內政部當期批次資料）
+for ds_id in ['77051', '25119', '34521']:
+    r2 = s.get(f"https://data.gov.tw/dataset/{ds_id}", timeout=20)
+    print(f"\ndataset/{ds_id}: HTTP {r2.status_code}")
+    # 找下載連結
+    dl = re.findall(r'https?://[^\s"\'<>]*(?:plvr|lvr)[^\s"\'<>]*', r2.text, re.I)
+    print("  plvr/lvr links:", dl[:3])
+    # 找 zip/csv 連結
+    zips = re.findall(r'https?://[^\s"\'<>]*\.(?:zip|csv)[^\s"\'<>]*', r2.text, re.I)
+    print("  zip/csv links:", zips[:3])
 
 print("DONE")
