@@ -1,15 +1,7 @@
-Search HTTP: 200, size: 678187
-Dataset links: []
 
-dataset/77051: HTTP 200
-  plvr/lvr links: ['https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landcsv.zip', 'https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landxml.zip', 'https://plvr.land.moi.gov.tw/Download?type=zip&amp;fileName=lvr_landcsv.zip']
-  zip/csv links: ['https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landcsv.zip', 'https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landxml.zip', 'https://plvr.land.moi.gov.tw/Download?type=zip&amp;fileName=lvr_landcsv.zip']
+=== https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip ===
+ERROR: HTTPSConnectionPool(host='plvr.land.moi.gov.tw', port=443): Max retries exceeded with url: /opendata/lvr_landAcsv.zip (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fa4a8652240>, 'Connection to plvr.land.moi.gov.tw timed out. (connect timeout=60)'))
 
-dataset/25119: HTTP 200
-  plvr/lvr links: ['https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip', 'https://plvr.land.moi.gov.tw/opendata/lvr_landAxml.zip', 'https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip']
-  zip/csv links: ['https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip', 'https://plvr.land.moi.gov.tw/opendata/lvr_landAxml.zip', 'https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip']
-
-dataset/34521: HTTP 200
-  plvr/lvr links: []
-  zip/csv links: []
+=== https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landcsv.zip ===
+ERROR: HTTPSConnectionPool(host='plvr.land.moi.gov.tw', port=443): Max retries exceeded with url: /Download?type=zip&fileName=lvr_landcsv.zip (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fa4a8652450>, 'Connection to plvr.land.moi.gov.tw timed out. (connect timeout=60)'))
 DONE
