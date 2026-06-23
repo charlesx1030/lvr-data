@@ -1,25 +1,38 @@
-import requests, re, json
+import requests, zipfile, io, csv
 
 s = requests.Session()
 s.headers.update({"User-Agent": "Mozilla/5.0"})
 
-# 搜尋 data.gov.tw 實價登錄桃園市
-r1 = s.get("https://data.gov.tw/datasets/search?q=%E5%AF%A6%E5%83%B9%E7%99%BB%E9%8C%84%E6%A1%83%E5%9C%92&page=1&pageSize=10", timeout=30)
-print(f"Search HTTP: {r1.status_code}, size: {len(r1.content)}")
+# 試 /opendata/ 路徑
+urls = [
+    "https://plvr.land.moi.gov.tw/opendata/lvr_landAcsv.zip",
+    "https://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landcsv.zip",
+]
 
-# 找 dataset links
-links = re.findall(r'href=["\'](/dataset/\d+)["\']', r1.text)
-print("Dataset links:", links[:10])
-
-# 試 dataset/77051（內政部當期批次資料）
-for ds_id in ['77051', '25119', '34521']:
-    r2 = s.get(f"https://data.gov.tw/dataset/{ds_id}", timeout=20)
-    print(f"\ndataset/{ds_id}: HTTP {r2.status_code}")
-    # 找下載連結
-    dl = re.findall(r'https?://[^\s"\'<>]*(?:plvr|lvr)[^\s"\'<>]*', r2.text, re.I)
-    print("  plvr/lvr links:", dl[:3])
-    # 找 zip/csv 連結
-    zips = re.findall(r'https?://[^\s"\'<>]*\.(?:zip|csv)[^\s"\'<>]*', r2.text, re.I)
-    print("  zip/csv links:", zips[:3])
+for url in urls:
+    print(f"\n=== {url} ===")
+    try:
+        r = s.get(url, timeout=60)
+        print(f"HTTP: {r.status_code}, size: {len(r.content)}")
+        if r.content[:4] == b'PK\x03\x04':
+            print("✅ ZIP!")
+            z = zipfile.ZipFile(io.BytesIO(r.content))
+            print("files:", z.namelist()[:5])
+            # 找桃園市買賣檔案
+            for name in z.namelist():
+                if 'H_' in name.upper() and '_A' in name.upper():
+                    print(f"Reading {name}...")
+                    with z.open(name) as f:
+                        rows = list(csv.reader(f.read().decode('utf-8-sig', errors='replace').splitlines()))
+                    print(f"  rows: {len(rows)}")
+                    longtan = [row for row in rows if row and '龍潭' in row[0]]
+                    print(f"  龍潭: {len(longtan)} 筆")
+                    if longtan:
+                        print(f"  sample: {longtan[0][:4]}")
+                    break
+        else:
+            print("Content:", r.content[:300])
+    except Exception as e:
+        print(f"ERROR: {e}")
 
 print("DONE")
