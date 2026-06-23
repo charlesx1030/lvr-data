@@ -1,13 +1,11 @@
-=== Test 1: DownloadSeason with Referer ===
+Step1: 訪問首頁...
+  HTTP: 200, cookies: {'JSESSIONID': '3E00613A5D7CD4A2BD44DC06322DBF7A'}
+  tokens: []
+
+Step2: POST 同意授權...
+  HTTP: 200, size: 30741
+
+Step3: 下載資料...
   HTTP: 200, size: 441
-  text: b'\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n<table width="100%" border="0" cellpadding="0" cellspacing="0" class="border" >\r\n\t<tr>\r\n\t\t<td class="text_bg">\xe7\xb3\xbb\xe7\xb5\xb1\xe8\xa8\x8a\xe6\x81\xaf</td>\r\n\t</tr>\r\n\t<t'
-
-=== Test 2: 先訪問首頁取 cookie 再下載 ===
-cookies: {'JSESSIONID': '462798538DE3326BAEE74ADC430BC210'}
-HTTP: 200, size: 441
-text: b'\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n<table width="100%" border="0" cellpadding="0" cellspacing="0" class="border" >\r\n\t<tr>\r\n\t\t<td class="text_bg">\xe7\xb3\xbb\xe7\xb5\xb1\xe8\xa8\x8a\xe6\x81\xaf</td>\r\n\t</tr>\r\n\t<t'
-
-=== Test 3: 直接下載本期 ===
-  HTTP: 404, size: 650
-  text: b'\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">\r\n\r\n<html>\r\n<head>\r\n<title>\xe6\x96\xbd\xe5\xb7\xa5\xe4\xb8\xad..</title>\r\n</head>\r\n<body>\r\n\t<t'
+  Content: b'\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n \r\n<table width="100%" border="0" cellpadding="0" cellspacing="0" class="border" >\r\n\t<tr>\r\n\t\t<td class="text_bg">\xe7\xb3\xbb\xe7\xb5\xb1\xe8\xa8\x8a\xe6\x81\xaf</td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td><table width="100%" border="0" cellspacing="0" cellpadding="0">\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>&nbsp;'
 DONE
