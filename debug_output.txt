@@ -1,29 +1,14 @@
-Step1: 訪問首頁...
-  HTTP: 200
-  Forms: 0
+JS URLs: ['/js/jquery.fileDownload.js']
 
-Buttons/submits: []
+Onclick: ['clickIndex(', 'clickIndex(', 'clickIndex(', 'clickIndex(', 'javascript:Newopenurl(']
 
-Download links: ['#tab_opendata_active_content', '#tab_saleremark_active_content', '#tab_opendata_history_content']
+JS funcs: ["clickIndex('Download_ajax_list')", "loadAjaxUrl('Download_ajax_active','tab_opendata_active_content')", "loadAjaxUrl('Download_ajax_salermark','tab_saleremark_active_content')", "loadAjaxUrl('DownloadHistory_ajax_list','tab_opendata_history_content')", "loadAjaxUrl('DownloadHistory_ajax_list','tab_opendata_history_content')"]
 
-=== HTML snippet (around 'agree' or '同意') ===
-數據或說明文字呈現，除供內部研究外，我們會視需要公佈該數據及說明文字，但不涉及特定個人之資料。</td>
-								</tr>
-								<tr>
+JS files: ['/js/jquery.min.js', '/js/popper.min.js', '/js/bootstrap-4.4.1.js', '/js/jquery.easing.min.js', '/js/jquery.form.js', '/js/jquery.loadmask.js', '/js/jquery.fileDownload.js', '/js/qt/qt.js?v=1782188132595', '/js/qt/qt-ajax.js?v=1782188132595', '/js/qt/qt-util.js?v=1782188132595', '/js/menu_ajax.js', '/js/qt_util.js', '/js/jquery.printElement.min.js', '/js/jquery.flot.js', '/js/jquery.flot.pie.js', '/js/jquery.base64.js', '/js/jquery.timers.js', '/js/datatables.min.js', '/js/dataTables.responsive.min.js', '/js/jquery-ui.min.js', '/js/jBox.min.js', '/js/jBox.Notice.min.js', '/js/jquery.ui.datepicker-zh-TW.js', '/js/jquery.poshytip.min.js', '/js/mobile-nav.js', '/js/gototop.js']
 
-									<td class="l_list_dot"><img src="../images/dot.png" width="7" height="7" alt=""></td>
-									<td>除非取得您的同意或其他法令之特別規定，本網站絕不會將您的個人資料揭露於第三人或使用於蒐集目的以外之其他用途。</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="l_subtitle">三、資料之保護</div>
-					<div class="l_content_text">
-						<table width="100%" border="0">
-							<tbody>
-								<tr>
+In /js/jquery.min.js: []
 
-									<td class="l_list_dot"><img src="../images/dot.png" width="7" height="7" alt=""></td>
-									<td>本網站主機均設有防火牆、防毒系統等相關的各項資訊安全設備及必要的安全防護措施，加以保護網站及您的個人資料採用嚴格的保護措施，只由經過授權的人員才能接觸您的個人資料，相關處理人員皆簽有保密合約，如有違反保密義者，將會受到相關的法律處分。</td>
-	
+In /js/popper.min.js: []
+
+In /js/bootstrap-4.4.1.js: []
 DONE
