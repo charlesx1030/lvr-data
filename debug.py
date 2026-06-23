@@ -3,25 +3,32 @@ import requests, re
 s = requests.Session()
 s.headers.update({"User-Agent": "Mozilla/5.0"})
 
-# 測試各個備用來源
-tests = [
-    # 政府開放資料平台
-    ("data.gov.tw API", "https://data.gov.tw/api/v2/rest/datastore/355000000A-000155-001?limit=1"),
-    # 內政部資料開放平台
-    ("moi open data", "https://data.moi.gov.tw/MoiOD/Data/DataDetail.aspx?oid=E2201829-B4ED-4ED6-B46D-EA0FC376368F"),
-    # 5168 實價登錄（有公開 API）
-    ("5168 api", "https://price.houseprice.tw/api/deals?zipcode=325&keyword=%E9%87%91%E9%BE%8D%E8%B7%AF&page=1"),
-    # 直接 data.gov.tw 下載
-    ("data.gov.tw download", "https://data.gov.tw/dataset/26820"),
-]
+# 解析 data.gov.tw 資料集頁面
+r1 = s.get("https://data.gov.tw/dataset/26820", timeout=30)
+html = r1.text
 
-for name, url in tests:
-    try:
-        r = s.get(url, timeout=15)
-        print(f"{name}: HTTP {r.status_code}, size {len(r.content)}")
-        if r.status_code == 200:
-            print(f"  first 200: {r.content[:200]}")
-    except Exception as e:
-        print(f"{name}: ERROR {e}")
+# 找下載連結
+download_links = re.findall(r'https?://[^\s"\'<>]*(?:download|csv|zip)[^\s"\'<>]*', html, re.I)
+print("Download links from dataset/26820:")
+for l in download_links[:10]:
+    print(" ", l)
+
+# 找 data.gov.tw/dataset 相關 API
+api_links = re.findall(r'https?://[^\s"\'<>]*data\.gov\.tw[^\s"\'<>]*', html, re.I)
+print("\ndata.gov.tw links:")
+for l in set(api_links[:10]):
+    print(" ", l)
+
+# 試試 CKAN API (data.gov.tw 用 CKAN)
+r2 = s.get("https://data.gov.tw/api/3/action/package_show?id=26820", timeout=15)
+print(f"\nCKAN API: {r2.status_code}")
+if r2.status_code == 200:
+    import json
+    data = r2.json()
+    if data.get('success'):
+        resources = data['result'].get('resources', [])
+        print(f"Resources: {len(resources)}")
+        for res in resources:
+            print(f"  {res.get('name','?')} -> {res.get('url','?')[:100]}")
 
 print("DONE")
