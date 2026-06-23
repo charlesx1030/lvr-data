@@ -1,14 +1,113 @@
-JS URLs: ['/js/jquery.fileDownload.js']
+qt.js size: 626
 
-Onclick: ['clickIndex(', 'clickIndex(', 'clickIndex(', 'clickIndex(', 'javascript:Newopenurl(']
+Download funcs: []
 
-JS funcs: ["clickIndex('Download_ajax_list')", "loadAjaxUrl('Download_ajax_active','tab_opendata_active_content')", "loadAjaxUrl('Download_ajax_salermark','tab_saleremark_active_content')", "loadAjaxUrl('DownloadHistory_ajax_list','tab_opendata_history_content')", "loadAjaxUrl('DownloadHistory_ajax_list','tab_opendata_history_content')"]
+qt-ajax.js size: 3388
 
-JS files: ['/js/jquery.min.js', '/js/popper.min.js', '/js/bootstrap-4.4.1.js', '/js/jquery.easing.min.js', '/js/jquery.form.js', '/js/jquery.loadmask.js', '/js/jquery.fileDownload.js', '/js/qt/qt.js?v=1782188132595', '/js/qt/qt-ajax.js?v=1782188132595', '/js/qt/qt-util.js?v=1782188132595', '/js/menu_ajax.js', '/js/qt_util.js', '/js/jquery.printElement.min.js', '/js/jquery.flot.js', '/js/jquery.flot.pie.js', '/js/jquery.base64.js', '/js/jquery.timers.js', '/js/datatables.min.js', '/js/dataTables.responsive.min.js', '/js/jquery-ui.min.js', '/js/jBox.min.js', '/js/jBox.Notice.min.js', '/js/jquery.ui.datepicker-zh-TW.js', '/js/jquery.poshytip.min.js', '/js/mobile-nav.js', '/js/gototop.js']
+Download_ajax_active: 200, size: 21952
 
-In /js/jquery.min.js: []
+ 
 
-In /js/popper.min.js: []
 
-In /js/bootstrap-4.4.1.js: []
+
+
+
+
+
+
+
+
+
+  
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+	<div class="form-row p-0 mx-0 my-0">
+		<div class="form-group col-sm-12">
+			<span class="text-info">【註:CSV格式編碼為UTF-8】</span><br>
+			<span class="text-danger">資料內容：登記日期 115年6月1日至 115年6月10日之買賣案件，及訂約日期 115年5月1日至 115年5月10日之租賃案件，及交易日
+
+DownloadHistory_ajax_list: 200, size: 20661
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+  
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
+		
+     	<table width="100%" border='0' cellpadding='0' cellspacing='0' id='table5' 
+               style='border-left: 1px solid #cecece; border-right: 1px solid #cecece; border-top: 1px  solid #dfdfdf;
+                border-bottom: 1
+
+Download_ajax_list: 200, size: 5181
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+  
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
+	<div id="intro" class="second-section font">
+		<div
+			class="container-fluid col-xl-10 col-lg-10 col-md-12 col-sm-12 p-0">
+			<div class="rounded-0 border-0">
+				<a
+					class="h5 text-center text-secondary text-decoration-none d-b
 DONE
