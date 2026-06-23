@@ -1,33 +1,35 @@
-import requests, zipfile, io, csv, sys
+import requests, zipfile, io, re, sys
 
 s = requests.Session()
 s.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
 
 print("Step1: 訪問首頁...")
 r1 = s.get("https://plvr.land.moi.gov.tw/DownloadOpenData", timeout=30)
-print(f"  HTTP: {r1.status_code}, cookies: {dict(s.cookies)}")
+print(f"  HTTP: {r1.status_code}")
 
-# 找 CSRF token 或 agree 按鈕
-import re
-tokens = re.findall(r'name=["\']([^"\']*token[^"\']*)["\'] value=["\']([^"\']*)["\'] ', r1.text, re.I)
-print("  tokens:", tokens[:3])
+# 找所有 form 和 input
+forms = re.findall(r'<form[^>]*>(.*?)</form>', r1.text, re.S | re.I)
+print(f"  Forms: {len(forms)}")
+for i, form in enumerate(forms[:3]):
+    inputs = re.findall(r'<input[^>]*>', form, re.I)
+    print(f"  Form {i}: {inputs[:5]}")
+    
+# 找所有 button
+buttons = re.findall(r'<(?:button|input)[^>]*(?:submit|agree|download)[^>]*>', r1.text, re.I)
+print(f"\nButtons/submits: {buttons[:5]}")
 
-print("\nStep2: POST 同意授權...")
-# 嘗試 POST agree
-r2 = s.post("https://plvr.land.moi.gov.tw/DownloadOpenData", 
-    data={"agree": "Y"},
-    timeout=30)
-print(f"  HTTP: {r2.status_code}, size: {len(r2.content)}")
+# 找 href with download
+download_links = re.findall(r'href=["\']([^"\']*)["\'][^>]*>[^<]*(?:下載|download|agree)[^<]*<', r1.text, re.I)
+print(f"\nDownload links: {download_links[:5]}")
 
-print("\nStep3: 下載資料...")
-r3 = s.get(
-    "https://plvr.land.moi.gov.tw/DownloadSeason?season=114S4&type=zip&fileName=H_lvr_land_A.zip",
-    timeout=60
-)
-print(f"  HTTP: {r3.status_code}, size: {len(r3.content)}")
-if r3.content[:4] == b'PK\\x03\\x04':
-    print("  ✅ ZIP!")
+# 輸出原始 HTML 的關鍵部分
+print("\n=== HTML snippet (around 'agree' or '同意') ===")
+idx = r1.text.find('同意')
+if idx > 0:
+    print(r1.text[max(0,idx-200):idx+500])
 else:
-    print("  Content:", r3.content[:300])
+    print("找不到 '同意'")
+    # 看前 500 chars
+    print("First 500:", r1.text[:500])
 
 print("DONE")
